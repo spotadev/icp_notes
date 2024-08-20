@@ -1,3 +1,192 @@
+====================================================================================================
 ICP Getting Started
+====================================================================================================
 
+This doc is for mac / unix.  
+
+Its instructions were taken from:
+
+    https://internetcomputer.org/docs/current/developer-docs/getting-started/install/
+
+ICP is an alternative block chain system which among other things does not charge users for gas 
+fees.  It instead charges the smart contract.
+
+In order to develop with ICP you need dfx.  Installing dfxvm allows you to choose the version of 
+dfx.
+
+See what we are meant to be doin with ICP:
+
+    https://gitlab.com/ututrust/utu-trust-token-solidity/-/issues/47
+
+
+====================================================================================================
+install dfxvm
+====================================================================================================
+
+If you have a silicon mac you need to install Rosetta. See above link.
+
+To install dfxvm which allows you to choose version of dfx:
+
+     sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
+     
+It will show:
+
+    info: Executing dfxvm install script, commit: 967bef1b473e9d2f9de1596b822e14d4cdb41108
+    info: Downloading latest release...
+    info: Checking integrity of tarball...
+    dfxvm-x86_64-apple-darwin.tar.gz: OK
+    
+    Welcome to dfxvm!
+    
+    This will install dfxvm, and download and install dfx.
+    
+    The dfxvm and dfx commands will be added to the following directory:
+    
+       /Users/johndickerson/Library/Application Support/org.dfinity.dfx/bin
+    
+    This path will then be added to your PATH environment variable by
+    modifying the profile files located at:
+    
+       /Users/johndickerson/.profile
+       /Users/johndickerson/.zshenv
+    
+    Current installation options:
+    
+                dfx version: latest
+       modify PATH variable: yes
+    
+    Proceed with installation?:
+    > Proceed with installation (default)
+      Customize installation
+      Cancel installation
+
+Then it does installation and shows:
+
+    dfxvm is installed now.
+    
+    To get started you may need to restart your current shell.
+    This would reload your PATH environment variable to include
+    the dfxvm bin directory.
+    
+    To configure your shell, run:
+      source "$HOME/Library/Application Support/org.dfinity.dfx/env"
+
+
+====================================================================================================
+Install / Use:  nvm / node
+====================================================================================================
+
+nvm is used for switching between versions of node.  
+
+If you do not have nvm installed:
+
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+        
+or
+
+    brew install nvm
+
+Once you have nvm install you can install node:
+
+    nvm install 18
+    
+You can see versions of nvm installed:
+
+    nvm list
+    
+You can switch version
+
+    nvm use 18
+
+
+====================================================================================================
+Start local replica
+====================================================================================================
+
+The local replica is a test node used to interact with smart contracts
+
+    dfx start
+    
+Showed:
+
+    Running dfx start for version 0.22.0
+    Using the default configuration for the local shared network.
+      Installed dfx 0.22.0 to cache.
+    Initialized replica.
+    Dashboard: http://localhost:51036/_/dashboard
+
+The dashboard shows:
+
+    Internet Computer Replica Dashboard
+    Subnet Settings & Parameters
+    Replica Version 0.9.0
+    Subnet Type Application
+    Total Compute Allocation    0 %
+    Http Server Config
+    Config { listen_addr: 127.0.0.1:0, port_file_path: 
+    Some("/Users/johndickerson/Library/Application Support/org.dfinity.dfx/network/local/replica-configuration/replica-1.port"), 
+    connection_read_timeout_seconds: 1200, request_timeout_seconds: 300, 
+    http_max_concurrent_streams: 256, 
+    max_request_size_bytes: 5242880, max_delegation_certificate_size_bytes: 1048576, 
+    max_read_state_concurrent_requests: 100, max_status_concurrent_requests: 100, 
+    max_catch_up_package_concurrent_requests: 100, max_dashboard_concurrent_requests: 100, 
+    max_call_concurrent_requests: 50, max_query_concurrent_requests: 400, 
+    max_pprof_concurrent_requests: 5, ingress_message_certificate_timeout_seconds: 10, 
+    max_tracing_flamegraph_concurrent_requests: 10 }
+    Canisters
+    Info at height 21
+
+
+====================================================================================================
+Create a icp_hello world project
+====================================================================================================
+
+As dfx start is running in a tab, you can open another tab to create the project:
+
+As I may check the project into git am going to change to my project directory:
+
+    cd ~/GITHUB_HOSTING
+    dfx new icp_hello
+
+It showed:
+
+   ? Select a backend language: ›
+    ❯ Motoko
+      Rust
+      TypeScript (Azle)
+      Python (Kybra)
+      
+For frontend language I choise React:
+
+  ? Select a frontend framework: ›
+      SvelteKit
+    ❯ React
+      Vue
+      Vanilla JS
+      No JS template
+      No frontend canister
+      
+I did not choose any of these:
+
+      ? Add extra features (space to select, enter to confirm) ›
+    ⬚ Internet Identity
+    ⬚ Bitcoin (Regtest)
+    ⬚ Frontend tests
+    
+Then it showed:
+
+
+====================================================================================================
+Stop local replica
+====================================================================================================
+
+This command stops the replica:
+
+    dfx stop
+
+If it complains processes are still running and it could not stop them run:
+
+    dfx killall
+    
+    
 

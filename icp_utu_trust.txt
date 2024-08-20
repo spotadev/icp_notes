@@ -1,0 +1,95 @@
+====================================================================================================
+ICP UTU Trust
+====================================================================================================
+
+This document explores how UTU Trust can work on both ICP and Ethereum.
+
+====================================================================================================
+Intro
+====================================================================================================
+
+ICP is a different blockchain technology to Ethereum. 
+
+Core differences include that end users do not pay gas fees on ICP but they do on Ethereum. In the 
+case of ICP the deployer of a smart contract to ICP needs to add a balance so the smart contract
+can be invoked.  The more used the contract, the more it costs.
+
+Another difference is that smart contract code size and storage on Ethereum is much more expensive 
+than on ICP.
+
+A further difference is that ICP smart contracts (called canisters) can make https calls.
+
+ICP and Ethereum private and public keys are not of the same type and thus the same keys cannot
+be used for both ICP and Ethereum chains - this is a big pity.
+
+There is no known existing mechanism I am aware of for linking the private keys of ICP with 
+Ethereum keys, so that a signing in a ICP Plug wallet also uses an Ethereum key to sign the same
+operation.
+
+Theoretically a chrome extension wallet could be created that stores both ICP and Ethereum private 
+keys which would allow the same operation to be signed with both keys.  However am unaware of an 
+implementation that does this.  I do not think this would be an impossible feat so it could be done
+(theoretically).
+
+
+====================================================================================================
+What are the options for having UTU Trust work on both ICP and Ethereum?
+====================================================================================================
+
+Solution 1: Duplicate and Sync
+==============================
+
+Duplicate the fungible and non-fungible Tokens on ICP and Ethereum.  
+
+As these duplicated tokens have balances and we want them to reflect the same balance on both sides 
+we need to listen to the chains on both sides and update the opposite side when a change occurs of 
+ownership or balance.
+
+We also have the transaction problem - we need to hold a lock on the opposite chain which forbids an
+operation between 2 addresses or a signing to occur until the opposite side has completed its 
+operation.
+
+The listeners are called Oracles and they can call smart contracts to update balances.  I do not 
+think however changing ownership of a token is possible via the smart contract with out the end
+user effectively signing twice, once for Ethereum and once for ICP.
+
+The Oracles are however not instantaneous so if one cares about the balances on both sides being
+the same at ALL TIMES, then any operation which changes a balance or signs requires to take a lock.
+
+That lock locks operations on the other chain and signing until the chain in operation has completed.
+
+This solution is complicated and requires duplication, when transferring tokens with a signature it 
+will anyway require the end user to sign twice unless there is a third party guardian of the 
+private keys and that guardian is trusted.
+
+
+Solution 2: Create a wallet that can hold both Ethereum and ICP private keys
+============================================================================
+
+In this scenario it is like having a separate ICP Plug wallet and Ethereum Wallet rolled in one.
+
+Effectively this would not be an integration into ICP and would just give the end user convenience
+of having one wallet instead of two.
+
+
+Solution 3: Encrypt private key of Ethereum with ICP private key and store it in the smart contract
+===================================================================================================
+
+This would require:
+
+(i) a setup process of the end user where they effectively trust the ICP smart contract
+    to be a guardian of their private key.
+
+Theoretically the end user could use the Ethereum private key ONLY for this purpose so if 
+security was compromised they would only lose their UTT balance.
+
+The disadvantage of this is that when using Ethereum chains they would have to make sure they use 
+the same wallet address. This is true unless:
+
+Multiple wallet addresses can be associated with social media connectors.  This would require the 
+user to sign a nonce with both the private key of ICP and the private key of Ethereum.
+
+
+
+
+

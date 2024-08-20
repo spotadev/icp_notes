@@ -1,0 +1,16 @@
+
+
+
+(i) rustup target add wasm32-unknown-unknown 
+
+(ii) cargo install candid-extractor
+
+(iii) Make sure dfx is not running:
+
+    dfx stop
+    
+If it complains processes are still running:
+
+    dfx killall
+
+(vii) bash -c "$(curl -fsSL https://raw.githubusercontent.com/Stephen-Kimoi/icp-evm-rust-bridge/main/install_and_deploy.sh)" -- utu-trust-utt-proxy-icp

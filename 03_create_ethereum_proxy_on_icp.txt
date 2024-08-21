@@ -1,0 +1,77 @@
+====================================================================================================
+Create Ethereum Proxy of ICP
+====================================================================================================
+
+There is an example that shows how to create a contract which calls a bridge canister 
+(smart contract).  The bridge cannister allows an ICP cannister to call an ethereum solidity 
+contract.
+
+This is the flow;
+
+    ICP canister example ==> calls ICP bridge cannister ==> calls Ethereum smart contract
+    
+The example was done by Steve and is hosted here:
+
+    https://github.com/Stephen-Kimoi/icp-evm-rust-bridge
+
+You need to firt make sure your rust and dependencies are up to date:
+
+
+    (i) rustup target add wasm32-unknown-unknown 
+    
+    (ii) cargo install candid-extractor
+    
+    (iii) Make sure dfx is not running:
+    
+            dfx stop
+            
+        If it complains processes are still running:
+        
+            dfx killall
+            
+    (iv) Make sure typescript is installed globally:  npm install -g typescript
+
+Then there are two ways of running the example.  One way is using the curl command which runs
+a shell script that does everything. The other way is cloning manually.
+
+    (vii) Curl way
+    
+        This command is a shell script which tries to automate creating a new project. It clones from
+        github and does stuff like start dfx and deploy the contracts.
+        
+        Run this command:
+        
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/Stephen-Kimoi/icp-evm-rust-bridge/main/install_and_deploy.sh)" -- utu-trust-utt-proxy-icp
+            
+        Look carefully at the terminal.  The script currently does not stop if there is an error. If
+        there is an error you may want to be doing it the manual way below.
+        
+    (viii) Manual way
+    
+            git clone https://github.com/Stephen-Kimoi/icp-evm-rust-bridge.git
+            
+            cd icp-evm-rust-bridge
+            
+            npm install
+            
+            dfx start
+            
+            dfx deps pull
+            
+            dfx deps init evm_rpc --argument '(record { nodesInSubnet = 28 })'
+    
+            dfx deps deploy
+            
+            dfx deploy
+        
+        If you have a problem with it deploying a canister and not being able to create it because
+        it is corrupt:
+        
+            dfx canister stop 7hfb6-caaaa-aaaar-qadga-cai
+
+            dfx canister delete 7hfb6-caaaa-aaaar-qadga-cai
+            
+            dfx deploy
+
+
+

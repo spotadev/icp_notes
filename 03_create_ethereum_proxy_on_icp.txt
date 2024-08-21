@@ -41,6 +41,9 @@ a shell script that does everything. The other way is cloning manually.
         Run this command:
         
             bash -c "$(curl -fsSL https://raw.githubusercontent.com/Stephen-Kimoi/icp-evm-rust-bridge/main/install_and_deploy.sh)" -- utu-trust-utt-proxy-icp
+         
+        Note that the last argument of the command is the name of the project - it will create a 
+        directory with that name.
             
         Look carefully at the terminal.  The script currently does not stop if there is an error. If
         there is an error you may want to be doing it the manual way below.

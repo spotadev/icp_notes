@@ -14,8 +14,7 @@ The example was done by Steve and is hosted here:
 
     https://github.com/Stephen-Kimoi/icp-evm-rust-bridge
 
-You need to firt make sure your rust and dependencies are up to date:
-
+You need to first make sure your rust and dependencies are up to date:
 
     (i) rustup target add wasm32-unknown-unknown 
     
@@ -65,7 +64,7 @@ a shell script that does everything. The other way is cloning manually.
             dfx deploy
         
         If you have a problem with it deploying a canister and not being able to create it because
-        it is corrupt:
+        it is corrupt and exists already:
         
             dfx canister stop 7hfb6-caaaa-aaaar-qadga-cai
 
